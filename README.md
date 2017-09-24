@@ -1,2 +1,2 @@
 # curve
-homework project
+the best game to spend time in class
