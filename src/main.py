@@ -1,19 +1,29 @@
+import os
+import threading
+import yaml
+
 import pygame
-from pygame import gfxdraw
 
 import events
 import curve
+import draw
 # import menu
+# import audio
 # import networking
 
-import threading
+# setup config
+with open(os.path.dirname(__file__) + "/../config/config.yml", "r") as yml:
+  config = yaml.load(yml)
 
-from config import conf
-from colors import color
+#setup colors
+with open(os.path.dirname(__file__) + "/../config/color.yml", "r") as yml:
+  color = yaml.load(yml)
 
-config = conf()
-color = color()
-
+# convert dicts to RGBs
+for colorName in color:
+  color[colorName] = (color[colorName]["R"], color[colorName]["G"], color[colorName]["B"], color[colorName]["A"])
+  
+# main function
 if __name__ == "__main__":
   pygame.init()
 
@@ -21,15 +31,18 @@ if __name__ == "__main__":
 
   clock = pygame.time.Clock()
 
-  display = pygame.display.set_mode((config.WIDTH, config.HEIGHT))
+  # set window size
+  display = pygame.display.set_mode((config["SCREEN"]["WIDTH"], config["SCREEN"]["HEIGHT"]))
 
   pygame.display.update()
 
-  curve = curve.Curve(pygame.K_LEFT, pygame.K_RIGHT, color.BLACK)
+  # create curves
+  curve = curve.Curve(pygame.K_LEFT, pygame.K_RIGHT, color["BLACK"])
   curves = [curve]
 
   exit = False
 
+  # infinite loop (until user exits)
   while not exit:
     threads = []
     for event in pygame.event.get():
@@ -37,6 +50,7 @@ if __name__ == "__main__":
         exit = True
         break
 
+      # thread for every event
       thread = threading.Thread(events.handle_event(event, curves))
       thread.start()
       threads.append(thread)
@@ -44,24 +58,22 @@ if __name__ == "__main__":
     if exit:
       break
 
+    # wait for event threads to finish before going on
     for thread in threads:
       thread.join()
 
-    display.fill(color.WHITE)
+    # clear screen
+    display.fill(color["WHITE"])
 
+    # draw every curve
     for curve in curves:
       curve.update()
-      pygame.gfxdraw.filled_circle(display, curve.get_x(), curve.get_y(), curve.get_width() + 2, curve.get_color())
-      pygame.gfxdraw.aacircle(display, curve.get_x(), curve.get_y(), curve.get_width() + 2, curve.get_color())
-      pygame.draw.lines(display, curve.get_color(), False, curve.get_path(), curve.get_width())
-
-    # pygame.gfxdraw.filled_circle(display, head_x, head_y, 5, color.BLACK)
-    # pygame.gfxdraw.aacircle(display, head_x, head_y, 5, color.BLACK)
-    # pygame.draw.lines(display, color.BLACK, False, my_list, 3)
+      draw.curve(display, curve)
 
     pygame.display.update()
 
-    clock.tick(config.FPS)
+    # keep set frames per second
+    clock.tick(config["GAME"]["FPS"])
 
   pygame.quit()
   quit()

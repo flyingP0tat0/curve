@@ -1,2 +1,6 @@
 .vscode
-src/__pychache__
+**/__pychache__
+**.pyc
+dist/**
+!dist/.gitkeep
+scripts

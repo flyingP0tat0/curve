@@ -1,18 +1,22 @@
+import os
 import random
 import math
-from config import conf
+import yaml
 
-config = conf()
+with open(os.path.dirname(__file__) + "/../config/config.yml", "r") as yml:
+  config = yaml.load(yml)
 
 class Curve:
   def __init__(self, leftKey, rightKey, color):
-    self.x = random.randint(50, config.WIDTH - 50)
-    self.y = random.randint(50, config.HEIGHT - 50)
+    self.x = random.randint(50, config["SCREEN"]["WIDTH"] - 50)
+    self.y = random.randint(50, config["SCREEN"]["HEIGHT"] - 50)
     self.angle = random.randint(0, 359)
-    self.speed = config.SPEED
+    self.speed = config["GAME"]["SPEED"]
     self.leftKey = leftKey
+    self.leftKeyDown = False
     self.rightKey = rightKey
-    self.width = config.CURVE_WIDTH
+    self.rightKeyDown = False
+    self.width = config["CURVE"]["WIDTH"]
     self.color = color
     self.path = [[self.x, self.y]]
 
@@ -34,42 +38,37 @@ class Curve:
   def get_color(self):
     return self.color
 
+  def left_down(self):
+    self.leftKeyDown = True
+
+  def right_down(self):
+    self.rightKeyDown = True
+
+  def left_up(self):
+    self.leftKeyDown = False
+
+  def right_up(self):
+    self.rightKeyDown = False
+
   def set_speed(self, speed):
     self.speed = speed
 
-  def left(self):
-    self.angle += config.ANGLE_CHANGE
-
-    if self.angle > 359:
-      self.angle -= 360
-
-  def right(self):
-    self.angle -= config.ANGLE_CHANGE
-
-    if self.angle < 0:
-      self.angle += 360
-
   def move(self, s):
-    if self.angle < 90:
-      changeX = int(round(s * math.sin(self.angle)))
-      changeY = int(round(math.sqrt(s**2 - changeX**2)))
-
-    elif self.angle < 180:
-      changeX = int(round(s * math.sin(180 - self.angle)))
-      changeY = -1 * int(round(math.sqrt(s**2 - changeX**2)))
-
-    elif self.angle < 270:
-      changeX = -1 * int(round(s * math.sin(self.angle - 180)))
-      changeY = -1 * int(round(math.sqrt(s**2 - changeX**2)))
-
-    elif self.angle < 360:
-      changeX = -1 * int(round(s * math.sin(360 - self.angle)))
-      changeY = int(round(math.sqrt(s**2 - changeX**2)))
-
-    self.x += changeX
-    self.y += changeY
+    self.x += int(s * math.cos(self.angle * math.pi / 180))
+    self.y += int(s * math.sin(self.angle * math.pi / 180))
     self.path.append(self.get_coordinates())
 
   def update(self):
+    if self.leftKeyDown:
+      self.angle -= config["CURVE"]["ANGLE_CHANGE"]
+
+      if self.angle < 0:
+        self.angle += 360
+
+    if self.rightKeyDown:
+      self.angle += config["CURVE"]["ANGLE_CHANGE"]
+
+      if self.angle > 359:
+        self.angle -= 360
+
     self.move(self.speed)
-    print(self.angle)
