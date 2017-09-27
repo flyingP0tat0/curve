@@ -1,10 +1,9 @@
 import os
 import random
 import math
-import yaml
+import util
 
-with open(os.path.dirname(__file__) + "/../config/config.yml", "r") as yml:
-  config = yaml.load(yml)
+config = util.get_config("config.yml")
 
 class Curve:
   def __init__(self, leftKey, rightKey, color):

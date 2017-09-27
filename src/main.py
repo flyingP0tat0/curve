@@ -1,23 +1,20 @@
-import os
 import threading
-import yaml
 
 import pygame
 
 import events
 import curve
 import draw
-# import menu
-# import audio
-# import networking
+import menu
+import audio
+import networking
+import util
 
 # setup config
-with open(os.path.dirname(__file__) + "/../config/config.yml", "r") as yml:
-  config = yaml.load(yml)
+config = util.get_config("config.yml")
 
 #setup colors
-with open(os.path.dirname(__file__) + "/../config/color.yml", "r") as yml:
-  color = yaml.load(yml)
+color = util.get_config("color.yml")
 
 # convert dicts to RGBs
 for colorName in color:

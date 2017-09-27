@@ -2,5 +2,5 @@
 **/__pychache__
 **.pyc
 dist/**
-!dist/.gitkeep
-scripts
+build/**
+*.spec
