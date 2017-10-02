@@ -1,12 +1,18 @@
 import os
 import random
 import math
+
+import pygame
+from pygame import gfxdraw
+
 import util
 
 config = util.get_config("config.yml")
 
 class Curve:
-  def __init__(self, leftKey, rightKey, color):
+  def __init__(self, name, color, leftKey, rightKey):
+    self.name = name
+    self.color = color
     self.x = random.randint(50, config["SCREEN"]["WIDTH"] - 50)
     self.y = random.randint(50, config["SCREEN"]["HEIGHT"] - 50)
     self.angle = random.randint(0, 359)
@@ -16,26 +22,10 @@ class Curve:
     self.rightKey = rightKey
     self.rightKeyDown = False
     self.width = config["CURVE"]["WIDTH"]
-    self.color = color
     self.path = [[self.x, self.y]]
 
-  def get_x(self):
-    return self.x
-
-  def get_y(self):
-    return self.y
-
   def get_coordinates(self):
-    return [self.get_x(), self.get_y()]
-
-  def get_path(self):
-    return self.path
-
-  def get_width(self):
-    return self.width
-
-  def get_color(self):
-    return self.color
+    return [self.x, self.y]
 
   def left_down(self):
     self.leftKeyDown = True
@@ -71,3 +61,8 @@ class Curve:
         self.angle -= 360
 
     self.move(self.speed)
+
+  def render(self, display):
+    pygame.gfxdraw.filled_circle(display, self.x, self.y, self.width + 2, self.color)
+    pygame.gfxdraw.aacircle(display, self.x, self.y, self.width + 2, self.color)
+    pygame.draw.lines(display, self.color, False, self.path, self.width)
