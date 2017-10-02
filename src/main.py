@@ -1,26 +1,19 @@
 import threading
 
 import pygame
+import webcolors
 
-import audio
-import collision
-import components
+# import audio
+# import collision
+# import components
 import curve
 import events
-import menu
-import networking
+# import menu
+# import networking
 import util
 
 # setup config
 config = util.get_config("config.yml")
-
-#setup colors
-color = util.get_config("color.yml")
-
-# convert dicts to RGBs
-for colorName in color:
-  color[colorName] = (color[colorName]["R"], color[colorName]["G"], color[colorName]["B"])#, color[colorName]["A"])
-  # TODO: fix A not working
   
 # main function
 if __name__ == "__main__":
@@ -36,7 +29,7 @@ if __name__ == "__main__":
   pygame.display.update()
 
   # create curves
-  curve = curve.Curve("Jan", color["BLACK"], pygame.K_LEFT, pygame.K_RIGHT)
+  curve = curve.Curve("Jan", webcolors.name_to_rgb("black"), pygame.K_LEFT, pygame.K_RIGHT)
   curves = [curve]
 
   exit = False
@@ -62,7 +55,7 @@ if __name__ == "__main__":
       thread.join()
 
     # clear screen
-    display.fill(color["WHITE"])
+    display.fill(webcolors.name_to_rgb("white"))
 
     # draw every curve
     for curve in curves:
