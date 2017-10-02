@@ -8,9 +8,9 @@ IF ERRORLEVEL 1 (
     EXIT /B
   )
   ELSE (
-    pip install ../../requirements_dev.txt
+    pip install -r ../../requirements_dev.txt
   )
 )
 ELSE (
-  pip3 install ../../requirements_dev.txt
+  pip3 install -r ../../requirements_dev.txt
 )
