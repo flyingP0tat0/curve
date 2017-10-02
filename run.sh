@@ -5,8 +5,16 @@ case "$1" in
   . scripts/unix/game.sh
   ;;
 
+("run_server")
+  cd server && cargo run
+  ;;
+
 ("build")
   . scripts/unix/build.sh
+  ;;
+
+("build_server")
+  cd server && cargo build
   ;;
 
 ("setup")
