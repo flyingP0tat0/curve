@@ -14,7 +14,7 @@ case "$1" in
   ;;
 
 ("build_server")
-  cd server && cargo build
+  cd server && cargo build --release
   ;;
 
 ("setup")
