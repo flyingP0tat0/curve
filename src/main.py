@@ -1,7 +1,7 @@
 import threading
 
 import pygame
-import webcolors
+import webcolors as color
 
 # import audio
 # import collision
@@ -29,7 +29,7 @@ if __name__ == "__main__":
   pygame.display.update()
 
   # create curves
-  curve = curve.Curve("Jan", webcolors.name_to_rgb("black"), pygame.K_LEFT, pygame.K_RIGHT)
+  curve = curve.Curve("Jan", color.name_to_rgb("black"), pygame.K_LEFT, pygame.K_RIGHT)
   curves = [curve]
 
   exit = False
@@ -55,7 +55,7 @@ if __name__ == "__main__":
       thread.join()
 
     # clear screen
-    display.fill(webcolors.name_to_rgb("white"))
+    display.fill(color.name_to_rgb("white"))
 
     # draw every curve
     for curve in curves:
