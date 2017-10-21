@@ -1,0 +1,15 @@
+install:
+  - ps: Install-Product python3
+  - ps: Install-Product rust
+
+build: off
+
+build_script:
+  - run.bat setup
+  - run.bat setup dev
+  - run.bat build
+  - run.bat build server
+  - run.bat test
+  - run.bat test server
+  - run.bat lint
+  - run.bat check server

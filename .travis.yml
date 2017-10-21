@@ -1,16 +1,17 @@
 os: osx
 
-language: rust
-
 install:
   - brew update
   - brew install python3
+  - brew install rust
 
 script:
   - cd curve
   - sh run.sh setup
-  - sh run.sh setup_dev
+  - sh run.sh setup dev
   - sh run.sh build
+  - sh run.sh build server
   - sh run.sh test
+  - sh run.sh test server
   - sh run.sh lint
-  - sh run.sh build_server
+  - sh run.sh check server
