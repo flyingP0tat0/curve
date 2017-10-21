@@ -2,7 +2,9 @@
 **/__pychache__
 **.pyc
 dist/**
+!dist/.gitignore
 build/**
+!build/.gitignore
 *.spec
 **/target
 **/Cargo.lock
