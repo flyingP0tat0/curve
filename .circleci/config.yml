@@ -7,16 +7,20 @@ jobs:
       - checkout
 
       - run:
+          name: update apk
+          command: apk update
+
+      - run:
           name: install dependencies
-          command: apk add -y sdl-dev sdl_ttf-dev sdl_image-dev sdl_mixer-dev libpng-dev libjpeg-dev
+          command: apk add sdl-dev sdl_ttf-dev sdl_image-dev sdl_mixer-dev libpng-dev libjpeg-dev
 
       - run:
           name: install python
-          command: apk add -y python3 py-pip
+          command: apk add python3 py-pip
       
       - run:
           name: install rust
-          command: apk add -y rust
+          command: apk add rust
 
       - run:
           name: setup
