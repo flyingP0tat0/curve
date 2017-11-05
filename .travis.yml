@@ -4,9 +4,14 @@ install:
   - brew update
   - brew install python3
   - brew install rust
+  - brew install sdl2
+  - brew install sdl2_ttf
+  - brew install sdl2_image
+  - brew install sdl2_mixer
+  - brew install libpng
+  - brew install libjpeg
 
 script:
-  - cd curve
   - sh run.sh setup
   - sh run.sh setup dev
   - sh run.sh build

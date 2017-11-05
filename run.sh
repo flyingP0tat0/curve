@@ -102,7 +102,7 @@ case "$1" in
   ;;
 
 ("lint")
-  help
+  help # TODO: implement linting
   ;;
 
 ("check"):
