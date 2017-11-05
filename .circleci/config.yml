@@ -1,0 +1,51 @@
+jobs:
+  build:
+    docker:
+      - image: alpine
+    working_directory: ~/curve
+    steps:
+      - checkout
+
+      - run:
+          name: install dependencies
+          command: apk add -y sdl-dev sdl_ttf-dev sdl_image-dev sdl_mixer-dev libpng-dev libjpeg-dev
+
+      - run:
+          name: install python
+          command: apk add -y python3 py-pip
+      
+      - run:
+          name: install rust
+          command: apk add -y rust
+
+      - run:
+          name: setup
+          command: sh run.sh setup
+
+      - run:
+          name: setup dev
+          command: sh run.sh setup dev
+
+      - run:
+          name: build
+          command: sh run.sh build
+
+      - run:
+          name: build server
+          command: sh run.sh build server
+
+      - run:
+          name: test
+          command: sh run.sh test
+
+      - run:
+          name: test server
+          command: sh run.sh test server
+      
+      - run:
+          name: lint
+          command: sh run.sh lint
+
+      - run:
+          name: check server
+          command: sh run.sh check server
