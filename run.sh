@@ -120,8 +120,8 @@ case "$1" in
 
 ("clean")
   rm -rf ${ABSOLUTE_PATH}/dist/*
-  rm -rf ${ABSOLUTE_PATH}/dist/*
-  rm -rf ${ABSOLUTE_PATH}/**/__pychache__
+  rm -rf ${ABSOLUTE_PATH}/build/*
+  rm -rf ${ABSOLUTE_PATH}/**/__pychache__ # TODO: not working
   rm -f ${ABSOLUTE_PATH}/**.pyc
   rm -f ${ABSOLUTE_PATH}/*.spec
   rm -rf ${ABSOLUTE_PATH}/**/target
