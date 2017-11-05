@@ -12,7 +12,7 @@ jobs:
 
       - run:
           name: install dependencies
-          command: apk add sdl-dev sdl_ttf sdl_image-dev sdl_mixer-dev libpng-dev jpeg-dev
+          command: apk add sdl-dev sdl_ttf-dev sdl_image-dev sdl_mixer-dev libpng-dev jpeg-dev
 
       - run:
           name: install python
