@@ -1,5 +1,8 @@
 import threading
+
 import webcolors as color
+
+import components
 
 class Menu:
   def __init__(self, display, background, elements):

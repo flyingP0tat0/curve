@@ -6,6 +6,7 @@ import pygame
 from pygame import gfxdraw
 
 import util
+import geometry
 
 config = util.get_config("config.yml")
 
@@ -23,9 +24,6 @@ class Curve:
     self.rightKeyDown = False
     self.width = config["CURVE"]["WIDTH"]
     self.path = [[self.x, self.y]]
-
-  def get_coordinates(self):
-    return [self.x, self.y]
 
   def left_down(self):
     self.leftKeyDown = True
@@ -45,7 +43,7 @@ class Curve:
   def move(self, s):
     self.x += int(s * math.cos(self.angle * math.pi / 180))
     self.y += int(s * math.sin(self.angle * math.pi / 180))
-    self.path.append(self.get_coordinates())
+    self.path.append([self.x, self.y])
 
   def update(self):
     if self.leftKeyDown:
@@ -63,6 +61,12 @@ class Curve:
     self.move(self.speed)
 
   def render(self, display):
-    pygame.gfxdraw.filled_circle(display, self.x, self.y, self.width + 2, self.color)
-    pygame.gfxdraw.aacircle(display, self.x, self.y, self.width + 2, self.color)
-    pygame.draw.lines(display, self.color, False, self.path, self.width)
+    threads = []
+
+    head = geometry.Circle([200, 200], 100, self.color, self.width + 2, True)
+    threads += head.render(display)
+
+    path = geometry.Path(self.path, self.color, self.width)
+    threads += path.render(display)
+
+    return threads

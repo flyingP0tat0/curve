@@ -1,4 +1,5 @@
 pygame==1.9.2
 pyyaml==3.12
 webcolors==1.7
+python-i18n==i18n
 ws4py==0.4.2

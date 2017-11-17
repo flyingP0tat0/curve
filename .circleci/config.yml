@@ -1,26 +1,18 @@
 jobs:
   build:
     docker:
-      - image: alpine
+      - image: python:3
     working_directory: ~/curve
     steps:
       - checkout
 
       - run:
-          name: update apk
-          command: apk update
-
-      - run:
           name: install dependencies
-          command: apk add sdl-dev sdl_image-dev sdl_mixer-dev libpng-dev jpeg-dev
-
-      - run:
-          name: install python
-          command: apk add python3 py-pip
+          command: apt-get update && apt-get install libsdl1.2-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libpng-dev libjpeg-dev
       
       - run:
           name: install rust
-          command: apk add rust
+          command: apt-get update && apt-get install rustc cargo
 
       - run:
           name: setup

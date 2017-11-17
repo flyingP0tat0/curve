@@ -12,7 +12,7 @@ class Point:
     self.color = color
 
   def render(self, display):
-    pygame.gfxdraw.pixel(display, self.x, self.y, self.color)
+    return [threading.Thread(pygame.gfxdraw.pixel(display, self.x, self.y, self.color))]
 
 
 class Line:
@@ -23,7 +23,7 @@ class Line:
     self.width = width
 
   def render(self, display):
-    pygame.draw.line(display, self.color, self.start, self.end, self.width)
+    return [threading.Thread(pygame.draw.line(display, self.color, self.start, self.end, self.width))]
 
 
 class Path:
@@ -35,47 +35,51 @@ class Path:
   def render(self, display):
     threads = []
 
-    for point in self.points:
-      line = Line(point[0], point[1], self.color, self.width)
+    if len(self.points) > 0:
 
-      thread = threading.Thread(line.render())
-      thread.start()
-      threads.append(thread)
+      i = 0
 
-    for thread in threads:
-      thread.join()
+      for point in self.points:
+        if len(self.points) > i + 1:
+          i += 1
+          start = point
+          end = self.points[i]
+          line = Line(start, end, self.color, self.width)
+          threads += line.render(display)
+
+    return threads
 
 
-class Rect:
+class Rect(Path):
   def __init__(self, start: List[int], width: int, height: int, color: List[int], lines_width: int = 1, filled: bool = False):
     self.start = start
     self.width = width
     self.height = height
-    self.color = color
-    self.lines_width = lines_width
     self.filled = filled
 
     a_start = [start[0], start[1]]
     a_end = [start[0] + width, start[1]]
-    a = [s_start, a_end]
+    a = [a_start, a_end]
+
+    c = [[a_start[0], a_start[1] + height], [a_end[0], a_end[1] + height]]
 
     b_start = a_end
     b_end = [a_end[0], a_end[1] + height]
     b = [b_start, b_end]
 
-    self.path = Path([a, b], self.color, self.lines_width)
+    Path.__init__([a[0], a[1], b[0], b[1], c[0], c[1], c[0], a[0]], color, lines_width)
 
   def render(self, display):
-    self.path.render(display)
+    return Path.render(display)
 
   def on_click(self, function):
     self.on_click = function
 
   def click(self, x, y):
-    if x >= self.start[0] && x <= (self.start[0] + self.width)
+    if x >= self.start[0] and x <= self.start[0] + self.width:
       self.on_click()
 
-    if y >= self.start[1] && y <= (self.start[1] + self.height)
+    if y >= self.start[1] and y <= self.start[1] + self.height:
       self.on_click()
 
 
@@ -88,19 +92,23 @@ class Circle:
     self.filled = filled
 
   def render(self, display):
+    threads = []
+
     if self.filled:
-      pygame.gfxdraw.filled_circle(display, self.centre[0], self.centre[1], self.radius, self.color)
+      threads.append(threading.Thread(pygame.gfxdraw.filled_circle(display, self.centre[0], self.centre[1], self.radius, self.color)))
       self.width = 0
 
-    if self.width = 0:
-      pygame.gfxdraw.aacircle(display, self.centre[0], self.centre[1], self.radius, self.color)
+    if self.width == 0:
+      threads.append(threading.Thread(pygame.gfxdraw.aacircle(display, self.centre[0], self.centre[1], self.radius, self.color)))
 
     else:
-      pygame.draw.circle(display, self.color, [self.centre[0], self.centre[1]], self.radius, self.width)
+      threads.append(threading.Thread(pygame.draw.circle(display, self.color, [self.centre[0], self.centre[1]], self.radius, self.width)))
+
+    return threads
 
   def on_click(self, function):
     self.on_click = function
 
   def click(self, x, y):
-    if (x - self.centre[0])**2 + (y - center[1])**2 < self.radius**2
+    if (x - self.centre[0])**2 + (y - center[1])**2 < self.radius**2:
       self.on_click()

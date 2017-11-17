@@ -8,7 +8,8 @@ import webcolors as color
 # import components
 import curve
 import events
-# import menu
+import menu
+import geometry
 # import networking
 import util
 
@@ -29,38 +30,44 @@ if __name__ == "__main__":
   pygame.display.update()
 
   # create curves
-  curve = curve.Curve("Jan", color.name_to_rgb("black"), pygame.K_LEFT, pygame.K_RIGHT)
-  curves = [curve]
+  # curve = curve.Curve("Jan", color.name_to_rgb("black"), pygame.K_LEFT, pygame.K_RIGHT)
+  # curves = [curve]
 
   exit = False
 
   # infinite loop (until user exits)
   while not exit:
-    threads = []
+    # threads = []
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         exit = True
         break
 
       # thread for every event
-      thread = threading.Thread(events.handle_event(event, curves))
-      thread.start()
-      threads.append(thread)
+      # thread = threading.Thread(events.handle_event(event, curves))
+      # thread.start()
+      # threads.append(thread)
 
     if exit:
       break
 
     # wait for event threads to finish before going on
-    for thread in threads:
-      thread.join()
+    # for thread in threads:
+    #   thread.join()
 
     # clear screen
     display.fill(color.name_to_rgb("white"))
 
-    # draw every curve
-    for curve in curves:
-      curve.update()
-      curve.render(display)
+    # # draw every curve
+    # for curve in curves:
+    #   curve.update()
+    #   curve.render(display)
+
+    # obj = geometry.Line([10, 10], [50, 50], color.name_to_rgb("black"), 5)
+    # obj = geometry.Path([[10, 10], [100, 50], [50, 100], [250, 400]], color.name_to_rgb("black"), 5)
+    # obj = geometry.Rect([50, 50], 100, 200, color.name_to_rgb("black"), 5)
+    obj = geometry.Circle([200, 200], 100, color.name_to_rgb("black"), 2, True)
+    obj.render(display)
 
     pygame.display.update()
 
