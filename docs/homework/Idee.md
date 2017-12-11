@@ -8,10 +8,11 @@ Für mein Spiel habe ich als Vorlage das Spiel bzw. das Spielprinzip “Achtung,
 Für die Programmierung werde ich die Bibliothek PyGame verwenden, die sehr viele Freiräume bei dem Zeichnen der Oberfläche bietet und eine klare Trennung zwischen Spiellogik und grafischer Darstellung ermöglicht.
 <br>
 <br>
-Außerdem werde ich für die Entwicklung nicht Jython benutzen, sondern einen selbstständigen Editor (Visual Studio Code) und den Code mittels Python3 (Referenzimplementierung CPython) auf einer Linux-Distribution ausführen. Am Ende wird auch eine selbstständige ausführbare Datei verfügbar sein, für die kein Python auf dem Rechner von Nöten sein wird.
+Außerdem werde ich für die Entwicklung nicht Jython benutzen, sondern einen selbstständigen Editor (Visual Studio Code) und den Code mittels Python3 (Referenzimplementierung CPython) auf einer Linux-Distribution ausführen.
 <br>
 <br>
 Ich habe vor, alle Komponenten des Spiels als Klassen darzustellen, die eigene Funktionen für die Berechnung ihrer Geometrie besitzen. Aus diesen berechneten Daten soll am Ende eine einzige Funktion alle Elemente zeichnen.
+**Anmerkung:** Diese Idee konnte aufgrund der Struktur von PyGame nicht umgesetzt werden bzw. stellte sich als nicht praktikabel heraus.
 <br>
 <br>
 Als Schwierigkeit sehe ich vor allem die Kollisionsberechnung der Kurven an, hier werde ich eine möglichst einfache und zugleich effizient Methode suchen, die Kurven miteinander abzugleichen.
