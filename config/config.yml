@@ -3,7 +3,7 @@ SCREEN:
   HEIGHT: 800
 
 GAME:
-  SPEED: 3
+  SPEED: 4
   FPS: 30
 
 CURVE:

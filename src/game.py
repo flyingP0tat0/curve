@@ -35,7 +35,7 @@ class Game:
             elif curve.alive:
                 all = [[curve.x, curve.y]]
 
-                for i in range((self.config["CURVE"]["WIDTH"] + 3)):
+                for i in range((self.config["CURVE"]["WIDTH"] + 2)):
                     all.append([curve.x + i, curve.y])
                     all.append([curve.x, curve.y + i])
                     all.append([curve.x + i, curve.y + i])
@@ -45,16 +45,17 @@ class Game:
                     all.append([curve.x + i, curve.y - i])
                     all.append([curve.x - i, curve.y + i])
 
-                print("ALL")
-                print(all)
-                print("PATH")
-                print(curve.path)
+                path = curve.path.copy()
+
+                if len(path) > self.config["CURVE"]["WIDTH"] + 2:
+                    path.pop()
+                    path.pop()
+
+                    for point in all:
+                        if point in path:
+                            curve.alive = False
 
                 for point in all:
-                    if curve.path.count(point) > 1:
-                        curve.alive = False
-                        break
-                    
                     for other in self.curves:
                         if other.name != curve.name:
                             if point in other.path:

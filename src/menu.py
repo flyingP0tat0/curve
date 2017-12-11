@@ -32,9 +32,9 @@ class Start(Menu):
         self.elements = []
 
         title = "Curve"
-        titleText = text.ExoTextBold([100, 100], title, 200, color.name_to_rgb("white"))
+        titleText = text.ExoTextBold([config["SCREEN"]["WIDTH"] / 2 - 250, 200], title, 200, color.name_to_rgb("white"))
         instruction = "Press Enter to continue"
-        instructionText = text.MuliText([100, 500], instruction, 30, color.name_to_rgb("white"))
+        instructionText = text.MuliText([config["SCREEN"]["WIDTH"] / 2 - 150, 500], instruction, 30, color.name_to_rgb("white"))
 
         self.elements.append(titleText)
         self.elements.append(instructionText)
@@ -102,7 +102,16 @@ class Setup(Menu):
                 for config_curve in self.config_curves:
                     if event.key == config_curve.toggleKey:
                         config_curve.toggle()
-        
+                
+                i = 0
+                for config_curve in self.config_curves:
+                    if config_curve.active:
+                        i += 1
+                
+                if i < 2:
+                    for config_curve in self.config_curves:
+                        config_curve.active = True
+
         return self.config_curves
 
 
