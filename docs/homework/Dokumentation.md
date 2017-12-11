@@ -26,6 +26,7 @@
 
 
 ## audio
+
 | Zeile(n) | Erklärung |
 |:-:|:-|
 | 1 - 3 | import von verwendeten Modulen |
@@ -35,6 +36,7 @@
 
 
 ## geometry
+
 | Zeile(n) | Erklärung |
 |:-:|:-|
 | 1 - 4 | import von verwendeten Modulen |
@@ -47,6 +49,7 @@
 
 
 ## curve
+
 | Zeile(n) | Erklärung |
 |:-:|:-|
 | 1 - 8 | import von verwendeten Modulen |
@@ -61,6 +64,7 @@
 
 
 ## game
+
 | Zeile(n) | Erklärung |
 |:-:|:-|
 | 1 - 2 | import von verwendeten Modulen |
@@ -71,6 +75,7 @@
 
 
 ## menu
+
 | Zeile(n) | Erklärung |
 |:-:|:-|
 | 1 - 6 | import von verwendeten Modulen |
@@ -85,6 +90,7 @@
 
 
 ## text
+
 | Zeile(n) | Erklärung |
 |:-:|:-|
 | 1 - 3 | import von verwendeten Modulen |
@@ -94,6 +100,7 @@
 
 
 ## util
+
 | Zeile(n) | Erklärung |
 |:-:|:-|
 | 1 - 2 | import von verwendeten Modulen |
