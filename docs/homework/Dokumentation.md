@@ -64,10 +64,10 @@
 | Zeile(n) | Erklärung |
 |:-:|:-|
 | 1 - 2 | import von verwendeten Modulen |
-| 4 - 78 | Game-Klasse |
+| 4 - 84 | Game-Klasse |
 | 12 - 28 | Reaktion auf Tastendrücke -> an Kurven weiterleiten |
-| 30 - 69 | wenn Kurve nicht kollidiert, updaten, ansonsten nicht mehr verfolgen und dem Stand beitragen |
-| 71 - 78 | Zeichnen des gesamten Spielfeldes |
+| 30 - 75 | wenn Kurve nicht kollidiert, updaten, ansonsten nicht mehr verfolgen und dem Stand beitragen |
+| 77 - 84 | Zeichnen des gesamten Spielfeldes |
 
 
 ## menu
@@ -76,11 +76,12 @@
 | 1 - 6 | import von verwendeten Modulen |
 | 8 - 27 | Menu-Klasse, Grundmenü, Event-Handling (wird von Aufbauenden weitergeführt) und Zeichnen |
 | 30 - 45 | Start-Klasse, Startmenü, Text als Elemente |
-| 38 - 106 | Setup-Klasse, Konfigurationsmenü |
+| 48 - 115 | Setup-Klasse, Konfigurationsmenü |
 | 63 - 81 | Darstellung der Spieler, nach Aktivität unterschieden |
 | 85 - 92 | Umwandlung in tatsächliche Kurven |
-| 109 - 150 | End-Klasse, End-Menü |
-| 123 - 144 | Darstellung der Spieler, nach und mit Rang unterschieden |
+| 100 - 115 | (De-) Aktivierung der Kurven |
+| 118 - 159 | End-Klasse, End-Menü |
+| 132 - 153 | Darstellung der Spieler, nach und mit Rang unterschieden |
 
 
 ## text
