@@ -35,7 +35,7 @@ class Game:
             elif curve.alive:
                 all = [[curve.x, curve.y]]
 
-                for i in range((self.config["CURVE"]["WIDTH"] + 2)):
+                for i in range((self.config["CURVE"]["WIDTH"])):
                     all.append([curve.x + i, curve.y])
                     all.append([curve.x, curve.y + i])
                     all.append([curve.x + i, curve.y + i])
