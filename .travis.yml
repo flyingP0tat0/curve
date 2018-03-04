@@ -9,6 +9,7 @@ install:
   - brew install sdl_mixer
   - brew install libpng
   - brew install libjpeg
+  - pip3 install virtualenv
 
 script:
   - bash run.sh setup
