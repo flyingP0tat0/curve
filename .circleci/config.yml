@@ -14,16 +14,16 @@ jobs:
 
       - run:
           name: setup
-          command: run.sh setup
+          command: bash run.sh setup
 
       - run:
           name: build
-          command: run.sh build
+          command: bash run.sh build
 
       - run:
           name: test
-          command: run.sh test
+          command: bash run.sh test
       
       - run:
           name: lint
-          command: run.sh lint
+          command: bash run.sh lint
