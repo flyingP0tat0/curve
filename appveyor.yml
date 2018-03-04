@@ -1,16 +1,7 @@
-install:
-  - appveyor DownloadFile https://win.rustup.rs/ -FileName rustup-init.exe
-  - rustup-init -yv --default-toolchain stable --default-host x86_64-pc-windows-msvc
-  - set PATH=%PATH%;%USERPROFILE%\.cargo\bin
-
 build: off
 
 build_script:
   - run.bat setup
-  - run.bat setup dev
   - run.bat build
-  - run.bat build server
   - run.bat test
-  - run.bat test server
   - run.bat lint
-  - run.bat check server

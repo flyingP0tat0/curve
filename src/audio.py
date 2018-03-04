@@ -1,6 +1,11 @@
 from enum import Enum
+import os
 
 import pygame
+
+import util
+
+root = util.get_root()
 
 class State(Enum):
     NONE = 0
@@ -24,9 +29,9 @@ class Music:
 
 class GameMusic(Music):
     def __init__(self):
-        Music.__init__(self, "../audio/funkyelement.mp3")
+        Music.__init__(self, os.path.join(root, "audio/funkyelement.mp3"))
 
 
 class MenuMusic(Music):
     def __init__(self):
-        Music.__init__(self, "../audio/acousticbreeeze.mp3")
+        Music.__init__(self, os.path.join(root, "audio/acousticbreeeze.mp3"))

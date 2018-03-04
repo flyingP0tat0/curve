@@ -1,6 +1,11 @@
 from typing import List
+import os
 
 import pygame
+
+import util
+
+root = util.get_root()
 
 class Text:
     def __init__(self, start: List[int], text: str, font, color):
@@ -18,29 +23,29 @@ class FileText(Text):
 
 class ExoText(FileText):
     def __init__(self, start, text: str, size, color):
-        FileText.__init__(self, start, text, "../fonts/Exo/regular.ttf", size, color)
+        FileText.__init__(self, start, text, os.path.join(root, "fonts/Exo/regular.ttf"), size, color)
 
 
 class ExoTextLight(FileText):
     def __init__(self, start, text: str, size, color):
-        FileText.__init__(self, start, text, "../fonts/Exo/light.ttf", size, color)
+        FileText.__init__(self, start, text, os.path.join(root, "fonts/Exo/light.ttf"), size, color)
 
 
 class ExoTextBold(FileText):
     def __init__(self, start, text: str, size, color):
-        FileText.__init__(self, start, text, "../fonts/Exo/bold.ttf", size, color)
+        FileText.__init__(self, start, text, os.path.join(root, "fonts/Exo/bold.ttf"), size, color)
 
 
 class MuliText(FileText):
     def __init__(self, start, text: str, size, color):
-        FileText.__init__(self, start, text, "../fonts/Muli/regular.ttf", size, color)
+        FileText.__init__(self, start, text, os.path.join(root, "fonts/Muli/regular.ttf"), size, color)
 
 
 class MuliTextLight(FileText):
     def __init__(self, start, text: str, size, color):
-        FileText.__init__(self, start, text, "../fonts/Muli/light.ttf", size, color)
+        FileText.__init__(self, start, text, os.path.join(root, "fonts/Muli/light.ttf"), size, color)
 
 
 class MuliTextBold(FileText):
     def __init__(self, start, text: str, size, color):
-        FileText.__init__(self, start, text, "../fonts/Muli/bold.ttf", size, color)
+        FileText.__init__(self, start, text, os.path.join(root, "fonts/Muli/bold.ttf"), size, color)

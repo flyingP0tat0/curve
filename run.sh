@@ -2,49 +2,43 @@
 
 ABSOLUTE_PATH=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd -P )
 
+GREY="\e[0;37m"
+MAGENTA="\e[0;35m"
+RED="\e[0;31m"
+GREEN="\e[0;32m"
+CLEAR="\e[0m"
+
 function help {
   echo "curve tool"
   echo ""
   echo "  usage: sh run.sh <command>"
   echo ""
   echo "  available commands:"
-  echo "    run          - run the game"
-  echo "    build        - build the game for this platform"
-  echo "    setup        - install dependencies"
-  echo "    setup dev    - install development dependencies"
-  echo "    test         - run unit tests"
-  echo "    lint         - lint the code"
-  echo "    clean        - clean up all temporary files"
-  echo "    help         - show this help"
+  echo "    run   - run the game"
+  echo "    build - build the game for this platform"
+  echo "    setup - setup virtualenv and install dependencies"
+  echo "    test  - run unit tests"
+  echo "    lint  - lint the code"
+  echo "    clean - clean up all temporary files"
+  echo "    help  - show this help"
 }
 
 case "$1" in
 ("run")
-  case "$2" in
-  ("")
-    python3 ${ABSOLUTE_PATH}/src/main.py
-    ;;
-  
-  ("server")
-    $(cd ${ABSOLUTE_PATH}/server && cargo run)
-    ;;
-
-  *)
-    help
-    ;;
-  esac
+  ${ABSOLUTE_PATH}/bin/python3 ${ABSOLUTE_PATH}/src/main.py
   ;;
 
 ("build")
-  pyinstaller \
+  ${ABSOLUTE_PATH}/bin/python3 -OO -m PyInstaller \
   ${ABSOLUTE_PATH}/src/main.py \
   --name="curve" \
   --onefile \
   --windowed \
-  --add-data="config/**:/config/" \
-  --add-data="audio/**:/config/" \
-  --add-data="img/**:/img/" \
-  --add-data="fonts/**:/fonts/" \
+  --add-data="config/**:config/" \
+  --add-data="audio/**:audio/" \
+  --add-data="img/**:img/" \
+  --add-data="fonts/Exo/*:fonts/Exo/" \
+  --add-data="fonts/Muli/*:fonts/Muli/" \
   --icon=img/icon.ico \
   --workpath=${ABSOLUTE_PATH}/build \
   --distpath=${ABSOLUTE_PATH}/dist \
@@ -53,32 +47,51 @@ case "$1" in
   ;;
 
 ("setup")
-  case "$2" in
-  ("")
-    pip3 install -r ${ABSOLUTE_PATH}/requirements.txt
-    ;;
-  
-  ("dev")
-    pip3 install -r ${ABSOLUTE_PATH}/requirements_dev.txt
-    ;;
+  echo -e "${GREY}Checking for ${MAGENTA}python3${CLEAR}..."
+  command -v python3 --version >/dev/null 2>&1 || {
+    echo -e >&2 "${RED}Could not find python3. Please install it and check if it is included in your path.${CLEAR}"
+    exit 1
+  }
+  echo -e "${GREEN}Found python3${CLEAR}"
 
-  *)
-    help
-    ;;
-  esac
+  echo -e "${GREY}Checking for ${MAGENTA}pip3${CLEAR}..."
+  command -v pip3 --version >/dev/null 2>&1 || {
+    echo -e >&2 "${RED}Could not find pip3. Please install it and check if it is included in your path.${CLEAR}"
+    exit 1
+  }
+  echo -e "${GREEN}Found pip3${CLEAR}"
+  
+  echo -e "${GREY}Checking for ${MAGENTA}virtualenv${CLEAR}..."
+  command -v virtualenv --version >/dev/null 2>&1 || {
+    echo -e >&2 "${RED}Could not find virtualenv. Please install it and check if it is included in your path.${CLEAR}"
+    exit 1
+  }
+  echo -e "${GREEN}Found virtualenv${CLEAR}"
+
+  if [ ! -d ${ABSOLUTE_PATH}/bin ]; then
+    echo -e "${GREY}Installing virtualenv...${CLEAR}"
+    virtualenv -p python3 .
+    echo -e "${GREEN}Installed virtualenv!${CLEAR}"
+  fi
+  echo -e "${GREY}virtualenv already installed.${CLEAR}"
+
+  echo -e "${GREY}Installing dependencies...${CLEAR}"
+  ${ABSOLUTE_PATH}/bin/pip3 install -r ${ABSOLUTE_PATH}/requirements.txt
+  echo -e "${GREEN}Installed dependencies!${CLEAR}"
+
   ;;
 
 ("test")
-  python3 -m unittest discover -s ${ABSOLUTE_PATH}/test -p "*_test.py"
+  ${ABSOLUTE_PATH}/bin/python3 -m unittest discover -s ${ABSOLUTE_PATH}/test -p "*_test.py"
   ;;
 
 ("lint")
-  python3 -m pylint ${ABSOLUTE_PATH}/src/*.py
+  ${ABSOLUTE_PATH}/bin/python3 -m pylint ${ABSOLUTE_PATH}/src/*.py
   ;;
 
 ("clean")
-  rm -rf ${ABSOLUTE_PATH}/dist/*
-  rm -rf ${ABSOLUTE_PATH}/build/*
+  rm -rf ${ABSOLUTE_PATH}/dist
+  rm -rf ${ABSOLUTE_PATH}/build
   rm -rf ${ABSOLUTE_PATH}/**/__pychache__ # TODO: not working
   rm -f ${ABSOLUTE_PATH}/**.pyc
   rm -f ${ABSOLUTE_PATH}/*.spec
