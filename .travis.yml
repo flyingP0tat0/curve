@@ -2,7 +2,7 @@ os: osx
 
 install:
   - brew update
-  - brew install python3
+  - brew upgrade python
   - brew install sdl
   - brew install sdl_ttf
   - brew install sdl_image
@@ -11,7 +11,7 @@ install:
   - brew install libjpeg
 
 script:
-  - sh run.sh setup
-  - sh run.sh build
-  - sh run.sh test
-  - sh run.sh lint
+  - bash run.sh setup
+  - bash run.sh build
+  - bash run.sh test
+  - bash run.sh lint
