@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ABSOLUTE_PATH=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd -P )
 
@@ -11,7 +11,7 @@ CLEAR="\e[0m"
 function help {
   echo "curve tool"
   echo ""
-  echo "  usage: sh run.sh <command>"
+  echo "  usage: tool <command>"
   echo ""
   echo "  available commands:"
   echo "    run   - run the game"

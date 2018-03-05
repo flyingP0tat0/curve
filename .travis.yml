@@ -12,7 +12,7 @@ install:
   - pip3 install virtualenv
 
 script:
-  - bash run.sh setup
-  - bash run.sh build
-  - bash run.sh test
-  - bash run.sh lint || exit 0
+  - ./tool setup
+  - ./tool build
+  - ./tool test
+  - ./tool lint || exit 0
