@@ -3,7 +3,6 @@ from enum import Enum
 import pygame
 import webcolors as color
 
-import geometry
 import game
 import menu
 import audio

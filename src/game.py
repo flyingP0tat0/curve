@@ -8,7 +8,7 @@ class Game:
         self.curves = curves
         self.standings = standings
         self.is_end = False
-    
+
     def handle_events(self, events):
         for event in events:
             if event.type == pygame.KEYDOWN:
@@ -27,11 +27,11 @@ class Game:
                     elif event.key == curve.rightKey:
                         curve.right_up()
 
-    def update(self):        
+    def update(self):
         for curve in self.curves:
             if (curve.x < 0) or (curve.x > self.config["SCREEN"]["WIDTH"]) or (curve.y < 0) or (curve.y > self.config["SCREEN"]["HEIGHT"]):
                 curve.alive = False
-            
+
             elif curve.alive:
                 all = [[curve.x, curve.y]]
 
@@ -61,10 +61,10 @@ class Game:
                             if point in other.path:
                                 curve.alive = False
                                 break
-            
+
             if curve.alive:
                 curve.update()
-            
+
             else:
                 if curve not in self.standings:
                     self.standings.append(curve)

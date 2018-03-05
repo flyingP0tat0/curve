@@ -1,7 +1,6 @@
 from typing import List
 
 import pygame
-from pygame import gfxdraw
 
 class Line:
     def __init__(self, start: List[int], end: List[int], color: List[int], width: int = 1):
@@ -22,12 +21,12 @@ class Path:
 
     def render(self, display):
         if len(self.points) > 0:
-            i  = 0
+            i = 0
 
         for point in self.points:
             if len(self.points) > i + 1:
                 i += 1
-            
+
             start = point
             end = self.points[i]
             line = Line(start, end, self.color, self.width)

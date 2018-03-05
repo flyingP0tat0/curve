@@ -1,10 +1,6 @@
 import random
 import math
 
-import pygame
-from pygame import gfxdraw
-
-import util
 import geometry
 
 class ConfigCurve:
@@ -18,10 +14,10 @@ class ConfigCurve:
         self.leftKeyName = leftKeyName
         self.rightKey = rightKey
         self.rightKeyName = rightKeyName
-    
+
     def toggle(self):
         self.active = not self.active
-    
+
     def to_curve(self):
         return Curve(self.config, self.name, self.color, self.leftKey, self.rightKey)
 

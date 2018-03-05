@@ -3,10 +3,9 @@ import pygame
 
 import text
 import geometry
-import curve
 
 class Menu:
-    def __init__(self, background, elements = [], curves = []):
+    def __init__(self, background, elements=[]):
         self.background = background
         self.elements = elements
         self.next = False
@@ -96,18 +95,18 @@ class Setup(Menu):
 
     def handle_events(self, events):
         Menu.handle_events(self, events)
-        
+
         for event in events:
             if event.type == pygame.KEYDOWN:
                 for config_curve in self.config_curves:
                     if event.key == config_curve.toggleKey:
                         config_curve.toggle()
-                
+
                 i = 0
                 for config_curve in self.config_curves:
                     if config_curve.active:
                         i += 1
-                
+
                 if i < 2:
                     for config_curve in self.config_curves:
                         config_curve.active = True
@@ -151,9 +150,9 @@ class End(Menu):
 
             y += 125
             i += 1
-        
+
         Menu.__init__(self, color.name_to_rgb("white"), self.elements, [])
 
-    
+
     def enter(self):
         self.next = True
