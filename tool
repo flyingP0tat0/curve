@@ -95,6 +95,11 @@ case "$1" in
   rm -rf ${ABSOLUTE_PATH}/**/__pychache__ # TODO: not working
   rm -f ${ABSOLUTE_PATH}/**.pyc
   rm -f ${ABSOLUTE_PATH}/*.spec
+  rm -rf ${ABSOLUTE_PATH}/bin
+  rm -rf ${ABSOLUTE_PATH}/lib
+  rm -rf ${ABSOLUTE_PATH}/lib64
+  rm -rf ${ABSOLUTE_PATH}/incldude
+  rm -f ${ABSOLUTE_PATH}/pip-selfcheck.json
   ;;
 
 ("help")
