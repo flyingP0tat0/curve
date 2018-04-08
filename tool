@@ -9,6 +9,7 @@ GREEN="\e[0;32m"
 CLEAR="\e[0m"
 
 function help {
+  echo ""
   echo "curve tool"
   echo ""
   echo "  usage: tool <command>"
@@ -21,6 +22,7 @@ function help {
   echo "    lint  - lint the code"
   echo "    clean - clean up all temporary files"
   echo "    help  - show this help"
+  echo ""
 }
 
 case "$1" in
