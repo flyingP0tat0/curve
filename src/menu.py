@@ -151,7 +151,7 @@ class End(Menu):
             y += 125
             i += 1
 
-        Menu.__init__(self, color.name_to_rgb("white"), self.elements, [])
+        Menu.__init__(self, color.name_to_rgb("white"), self.elements)
 
 
     def enter(self):

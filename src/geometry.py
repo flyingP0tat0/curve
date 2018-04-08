@@ -1,6 +1,7 @@
 from typing import List
 
 import pygame
+import pygame.gfxdraw
 
 class Line:
     def __init__(self, start: List[int], end: List[int], color: List[int], width: int = 1):
