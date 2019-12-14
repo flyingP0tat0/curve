@@ -2,6 +2,6 @@ pygame==1.9.3
 pyyaml==3.12
 webcolors==1.7
 astroid==1.5.3
-isort==4.2.15
+isort==4.3.21
 pylint==1.7.2
 pyinstaller==3.3
