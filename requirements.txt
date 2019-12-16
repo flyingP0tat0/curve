@@ -1,5 +1,5 @@
 pygame==1.9.3
-pyyaml==3.12
+pyyaml==5.1
 webcolors==1.7
 astroid==1.5.3
 isort==4.2.15
