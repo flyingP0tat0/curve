@@ -4,4 +4,4 @@ webcolors==1.7
 astroid==1.5.3
 isort==4.2.15
 pylint==1.7.2
-pyinstaller==3.3
+pyinstaller==3.6
